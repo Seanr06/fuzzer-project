@@ -1,0 +1,5 @@
+target
+pol
+*.bin
+*.o
+a.out
