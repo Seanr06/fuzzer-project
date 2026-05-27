@@ -5,7 +5,7 @@
 #include <string.h>
 
 // Simple black-box fuzzer that generates random byte
-// strings that are passed as an argument into a compiled file to check for crashes.
+// strings that are passed as an argument into a compiled file to check for crashes
 int main(int argc, char *argv[])
 {
     srand(time(NULL));
@@ -13,9 +13,11 @@ int main(int argc, char *argv[])
     time_t initialTime = time(NULL);
     int numTests = 0;
 
+    // Loop until illegal argument is found
     while (crash == false)
     {
         char input[256] = "./target '";
+        // Fill input with 3 random byte characters
         for (int i = 0; i < 3; i++)
         {
             unsigned char byte = rand() % 256;
@@ -32,6 +34,7 @@ int main(int argc, char *argv[])
         strcat(input, "'");
         int result = system(input);
         numTests++;
+        // Check if the input causes an error
         if (result != 0)
         {
             crash = true;
